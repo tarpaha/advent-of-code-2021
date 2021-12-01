@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 
 namespace day_2021_12_01
 {
@@ -17,9 +18,19 @@ namespace day_2021_12_01
             return increasedCount;
         }
 
-        public static object Part2()
+        public static int Part2(IEnumerable<int> depthsCollection)
         {
-            return null!;
+            var depths = depthsCollection.ToArray();
+            var increasedCount = 0;
+            var previousSum = depths[0] + depths[1] + depths[2];
+            for (var i = 3; i < depths.Length; i++)
+            {
+                var sum = previousSum - depths[i - 3] + depths[i];
+                if (sum > previousSum)
+                    increasedCount += 1;
+                previousSum = sum;
+            }
+            return increasedCount;
         }
     }
 }

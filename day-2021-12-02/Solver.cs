@@ -11,9 +11,21 @@ namespace day_2021_12_02
             return x * y;
         }
         
-        public static object Part2()
+        public static int Part2(IEnumerable<(int x, int y)> commands)
         {
-            return null!;
+            var aim = 0;
+            var x = 0;
+            var y = 0;
+            foreach (var (cx, cy) in commands)
+            {
+                aim += cy;
+                if (cx > 0)
+                {
+                    x += cx;
+                    y += aim * cx;
+                }
+            }
+            return x * y;
         }
     }
 }

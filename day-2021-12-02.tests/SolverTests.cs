@@ -13,6 +13,7 @@ down 8
 forward 2";
 
         private const int Part1Result = 150;
+        private const int Part2Result = 900;
         
         [Test]
         public void Part1()
@@ -23,7 +24,7 @@ forward 2";
         [Test]
         public void Part2()
         {
-            Assert.That(Solver.Part2(), Is.Null);
+            Assert.That(Solver.Part2(Parser.Parse(Data)), Is.EqualTo(Part2Result));
         }
     }
 }

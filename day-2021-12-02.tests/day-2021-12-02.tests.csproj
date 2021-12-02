@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>day_2021_12_02.tests</RootNamespace>
         <Nullable>enable</Nullable>
 
         <IsPackable>false</IsPackable>
@@ -15,9 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\day-2021-12-01.app\day-2021-12-01.app.csproj" />
-      <ProjectReference Include="..\day-2021-12-02.app\day-2021-12-02.app.csproj" />
-      <ProjectReference Include="..\utils\utils.csproj" />
+      <ProjectReference Include="..\day-2021-12-02\day-2021-12-02.csproj" />
     </ItemGroup>
 
 </Project>

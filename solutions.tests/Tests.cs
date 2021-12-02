@@ -11,6 +11,7 @@ namespace solutions.tests
             get
             {
                 yield return new TestCaseData(new day_2021_12_01.app.Solution(), 1715, 1739);
+                yield return new TestCaseData(new day_2021_12_02.app.Solution(), null, null);
             }
         }
         

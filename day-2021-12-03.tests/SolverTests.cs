@@ -37,9 +37,21 @@ namespace day_2021_12_03.tests
         }
 
         [Test]
+        public void CalculateOxygenGeneratorRating_Works_Correctly()
+        {
+            Assert.That(Solver.CalculateOxygenGeneratorRating(Parser.Parse(Data)), Is.EqualTo("10111"));
+        }
+
+        [Test]
+        public void CalculateCO2ScrubberRating_Works_Correctly()
+        {
+            Assert.That(Solver.CalculateCO2ScrubberRating(Parser.Parse(Data)), Is.EqualTo("01010"));
+        }
+        
+        [Test]
         public void Part2()
         {
-            Assert.That(Solver.Part2(), Is.Null);
+            Assert.That(Solver.Part2(Parser.Parse(Data)), Is.EqualTo(230));
         }
     }
 }

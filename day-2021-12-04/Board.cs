@@ -16,6 +16,8 @@ namespace day_2021_12_04
                     _numbers.Add(numbers[col], (col, row));
                 }
             }
+            if (_numbers.Count != 25)
+                throw new ArgumentException();
         }
 
         private readonly Dictionary<int, (int, int)> _numbers = new();

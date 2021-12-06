@@ -11,10 +11,12 @@ namespace day_2021_12_06.tests
             Assert.That(Solver.Part1(Parser.Parse(data), days), Is.EqualTo(count));
         }
         
-        [Test]
-        public void Part2()
+        [TestCase("3,4,3,1,2", 18, 26)]
+        [TestCase("3,4,3,1,2", 80, 5934)]
+        [TestCase("3,4,3,1,2", 256, 26984457539)]
+        public void Part2(string data, int days, long count)
         {
-            Assert.That(Solver.Part2(), Is.Null);
+            Assert.That(Solver.Part2(Parser.Parse(data), days), Is.EqualTo(count));
         }
     }
 }

@@ -34,7 +34,7 @@ namespace day_2021_12_04.tests
         [Test]
         public void Part2()
         {
-            Assert.That(Solver.Part2(), Is.Null);
+            Assert.That(Solver.Part2(Parser.Parse(Data)), Is.EqualTo(1924));
         }
     }
 }

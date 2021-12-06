@@ -19,7 +19,7 @@ namespace day_2021_12_05.app
 
         public object SolvePart2()
         {
-            return Solver.Part2();
+            return Solver.Part2(Parser.Parse(Input.GetData()));
         }
     }
 }

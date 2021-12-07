@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using utils;
 
 namespace day_2021_12_07.app
@@ -14,7 +16,7 @@ namespace day_2021_12_07.app
 
         public object SolvePart1()
         {
-            return Solver.Part1();
+            return Solver.Part1(Parser.Parse(Input.GetData()));
         }
 
         public object SolvePart2()

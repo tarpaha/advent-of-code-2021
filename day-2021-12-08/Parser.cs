@@ -16,7 +16,6 @@ namespace day_2021_12_08
         public static Entry ParseLine(in string data)
         {
             var parts = data
-                .Replace(Environment.NewLine, "")
                 .Split('|')
                 .Select(part => part.Split(' ', StringSplitOptions.RemoveEmptyEntries))
                 .ToList();

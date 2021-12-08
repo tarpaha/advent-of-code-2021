@@ -6,8 +6,6 @@ namespace day_2021_12_08.tests
     public class ParserTests
     {
         [TestCase(@"acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf", 10, 4)]
-        [TestCase(@"acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab |
-cdfeb fcadb cdfeb cdbaf", 10, 4)]
         public void ParseLine_Works_Correctly(string data, int signalCount, int outputCount)
         {
             var entry = Parser.ParseLine(data);

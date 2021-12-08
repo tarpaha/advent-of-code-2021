@@ -2,12 +2,12 @@
 {
     public readonly struct Entry
     {
-        public string[] Signals { get; }
+        public string[] Digits { get; }
         public string[] Output { get; }
 
-        public Entry(string[] signals, string[] output)
+        public Entry(string[] digits, string[] output)
         {
-            Signals = signals;
+            Digits = digits;
             Output = output;
         }
     }

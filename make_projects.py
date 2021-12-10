@@ -47,7 +47,7 @@ public class Solution : ISolution
         Console.WriteLine($"Part2: {solution.SolvePart2()}");
     }
 
-    private Solution()
+    public Solution()
     {
         _data = Parser.Parse(Input.GetData());
     }

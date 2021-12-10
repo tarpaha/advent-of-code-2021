@@ -2,67 +2,65 @@
 
 import os, sys, shutil
 
-solver_code = """namespace <NAMESPACE>
-{
-    public static class Solver
-    {
-        public static object Part1()
-        {
-            return null!;
-        }
+solver_code = """namespace <NAMESPACE>;
 
-        public static object Part2()
-        {
-            return null!;
-        }
+public static class Solver
+{
+    public static object Part1()
+    {
+        return null!;
+    }
+
+    public static object Part2()
+    {
+        return null!;
     }
 }"""
 
 solution_code = """using System;
 using utils;
 
-namespace <NAMESPACE>
+namespace <NAMESPACE>;
+
+public class Solution : ISolution
 {
-    public class Solution : ISolution
+    public static void Main()
     {
-        public static void Main()
-        {
-            var solution = new Solution();
-            Console.WriteLine($"Part1: {solution.SolvePart1()}");
-            Console.WriteLine($"Part2: {solution.SolvePart2()}");
-        }
+        var solution = new Solution();
+        Console.WriteLine($"Part1: {solution.SolvePart1()}");
+        Console.WriteLine($"Part2: {solution.SolvePart2()}");
+    }
 
-        public object SolvePart1()
-        {
-            return Solver.Part1();
-        }
+    public object SolvePart1()
+    {
+        return Solver.Part1();
+    }
 
-        public object SolvePart2()
-        {
-            return Solver.Part2();
-        }
+    public object SolvePart2()
+    {
+        return Solver.Part2();
     }
 }"""
 
 tests_code = """using NUnit.Framework;
 
-namespace <NAMESPACE>
+namespace <NAMESPACE>;
+
+public class SolverTests
 {
-    public class SolverTests
+    [Test]
+    public void Part1()
     {
-        [Test]
-        public void Part1()
-        {
-            Assert.That(Solver.Part1(), Is.Null);
-        }
-        
-        [Test]
-        public void Part2()
-        {
-            Assert.That(Solver.Part2(), Is.Null);
-        }
+        Assert.That(Solver.Part1(), Is.Null);
     }
-}"""
+    
+    [Test]
+    public void Part2()
+    {
+        Assert.That(Solver.Part2(), Is.Null);
+    }
+}
+"""
 
 project = sys.argv[1]
 

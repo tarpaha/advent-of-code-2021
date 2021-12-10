@@ -4,6 +4,7 @@ public static class Parser
 {
     public static Data Parse(string data)
     {
-        return new Data();
+        var lines = data.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+        return new Data(lines);
     }
 }

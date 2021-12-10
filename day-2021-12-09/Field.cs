@@ -6,6 +6,7 @@ public class Field
     public int Height { get; }
 
     public int Number(int x, int y) => _numbers[x  + y * Width];
+    public void SetNumber(int x, int y, int number) => _numbers[x + y * Width] = number;
 
     private readonly List<int> _numbers;
 

@@ -12,14 +12,21 @@ namespace day_2021_12_09.app
             Console.WriteLine($"Part2: {solution.SolvePart2()}");
         }
 
+        public Solution()
+        {
+            _data = Parser.Parse(Input.GetData());
+        }
+
         public object SolvePart1()
         {
-            return Solver.Part1(Parser.Parse(Input.GetData()));
+            return Solver.Part1(_data);
         }
 
         public object SolvePart2()
         {
-            return Solver.Part2();
+            return Solver.Part2(_data);
         }
+        
+        private readonly Field _data;
     }
 }

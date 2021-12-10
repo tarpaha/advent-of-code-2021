@@ -39,10 +39,30 @@ public class SolverTests
     {
         Assert.That(Solver.Part1(Parser.Parse(Data)), Is.EqualTo(26397));
     }
+
+    [TestCase("[({(<(())[]>[[{[]{<()<>>", "}}]])})]")]
+    [TestCase("[(()[<>])]({[<{<<[]>>(", ")}>]})")]
+    [TestCase("(((({<>}<{<{<>}{[]{[]{}", "}}>}>))))")]
+    [TestCase("{<[[]]>}<{[{[{[]{()[[[]", "]]}}]}]}>")]
+    [TestCase("<{([{{}}[<[[[<>{}]]]>[]]", "])}>")]
+    public void GetClosingCharacters_Works_Correctly(string line, string result)
+    {
+        Assert.That(Solver.GetClosingCharacters(line), Is.EqualTo(result));
+    }
+
+    [TestCase("}}]])})]", 288957)]
+    [TestCase(")}>]})", 5566)]
+    [TestCase("}}>}>))))", 1480781)]
+    [TestCase("]]}}]}]}>", 995444)]
+    [TestCase("])}>", 294)]
+    public void CalculateStringCompletionScore_Works_Correctly(string line, long result)
+    {
+        Assert.That(Solver.CalculateStringCompletionScore(line), Is.EqualTo(result));
+    }
     
     [Test]
     public void Part2()
     {
-        Assert.That(Solver.Part2(Parser.Parse(Data)), Is.Null);
+        Assert.That(Solver.Part2(Parser.Parse(Data)), Is.EqualTo(288957));
     }
 }

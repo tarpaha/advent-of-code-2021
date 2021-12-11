@@ -4,7 +4,7 @@ public static class Solver
 {
     public static int Step(Grid grid)
     {
-        grid.Step();
+        grid.IncreaseAllLevels();
 
         var flashed = new HashSet<(int, int)>();
         while (true)
@@ -16,8 +16,7 @@ public static class Solver
                 {
                     if(flashed.Contains((x, y)))
                         continue;
-
-                    if (grid.GetLevel(x, y) > 9)
+                    if (grid.CanFlash(x, y))
                     {
                         grid.Flash(x, y);
                         flashed.Add((x, y));
@@ -31,7 +30,7 @@ public static class Solver
 
         foreach (var (x, y) in flashed)
         {
-            grid.SetLevel(x, y, 0);
+            grid.Reset(x, y);
         }
 
         return flashed.Count;
@@ -54,6 +53,13 @@ public static class Solver
 
     public static object Part2(Data data)
     {
-        return null!;
+        var grid = new Grid(data);
+        var step = 0;
+        while (!grid.IsAllFlashes())
+        {
+            Step(grid);
+            step += 1;
+        }
+        return step;
     }
 }

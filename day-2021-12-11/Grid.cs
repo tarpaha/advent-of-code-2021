@@ -14,13 +14,18 @@ public class Grid
         _energyLevels = new List<int>(data.Digits);
     }
 
-    public int GetLevel(int x, int y) => _energyLevels[x + y * Width];
-    public void SetLevel(int x, int y, int level) => _energyLevels[x + y * Width] = level;
+    public bool CanFlash(int x, int y) => _energyLevels[x + y * Width] > 9;
+    public void Reset(int x, int y) => _energyLevels[x + y * Width] = 0;
 
-    public void Step()
+    public void IncreaseAllLevels()
     {
         for (var i = 0; i < _energyLevels.Count; i++)
             _energyLevels[i] += 1;
+    }
+
+    public bool IsAllFlashes()
+    {
+        return _energyLevels.All(level => level == 0);
     }
     
     public void Flash(int sx, int sy)
@@ -33,7 +38,6 @@ public class Grid
             {
                 if(x < 0 || x > Width - 1)
                     continue;
-
                 _energyLevels[x + y * Width] += 1;
             }
         }
@@ -49,7 +53,8 @@ public class Grid
             {
                 result += _energyLevels[p++];
             }
-            result += Environment.NewLine;
+            if(y < Height - 1)
+                result += Environment.NewLine;
         }
         return result;
     }

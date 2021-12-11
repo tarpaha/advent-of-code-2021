@@ -30,15 +30,13 @@ public class SolverTests
 40004
 50005
 40004
-34543
-"));
+34543"));
         Solver.Step(grid);
         Assert.That(grid.ToString(), Is.EqualTo(@"45654
 51115
 61116
 51115
-45654
-"));    }
+45654"));    }
 
     [Test]
     public void Steps_Works_Correctly()
@@ -56,6 +54,6 @@ public class SolverTests
     [Test]
     public void Part2()
     {
-        Assert.That(Solver.Part2(Parser.Parse(Data)), Is.Null);
+        Assert.That(Solver.Part2(Parser.Parse(Data)), Is.EqualTo(195));
     }
 }

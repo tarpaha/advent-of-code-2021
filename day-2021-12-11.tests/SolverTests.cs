@@ -17,9 +17,40 @@ public class SolverTests
 5283751526";
 
     [Test]
+    public void Step_Works_Correctly()
+    {
+        var grid = new Grid(Parser.Parse(@"
+11111
+19991
+19191
+19991
+11111"));
+        Solver.Step(grid);
+        Assert.That(grid.ToString(), Is.EqualTo(@"34543
+40004
+50005
+40004
+34543
+"));
+        Solver.Step(grid);
+        Assert.That(grid.ToString(), Is.EqualTo(@"45654
+51115
+61116
+51115
+45654
+"));    }
+
+    [Test]
+    public void Steps_Works_Correctly()
+    {
+        var grid = new Grid(Parser.Parse(Data));
+        Assert.That(Solver.Steps(grid, 10), Is.EqualTo(204));
+    }
+    
+    [Test]
     public void Part1()
     {
-        Assert.That(Solver.Part1(Parser.Parse(Data)), Is.Null);
+        Assert.That(Solver.Part1(Parser.Parse(Data)), Is.EqualTo(1656));
     }
     
     [Test]

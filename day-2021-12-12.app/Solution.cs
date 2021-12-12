@@ -11,7 +11,7 @@ public class Solution : ISolution
         Console.WriteLine($"Part1: {solution.SolvePart1()}");
 
         var t = Stopwatch.StartNew();
-        Console.WriteLine($"Part2: {solution.SolvePart2()} done in {t.ElapsedMilliseconds}ms");
+        Console.WriteLine($"Part2: {solution.SolvePart2()}");
     }
 
     public Solution()

@@ -4,16 +4,13 @@ public static class Solver
 {
     public static int Part1(Data data)
     {
-        return Traverse(new Caves(data), new HashSet<string>(), new List<string>(), "start");
+        return Traverse(new Caves(data), new HashSet<string>(), "start");
     }
 
-    private static int Traverse(Caves caves, HashSet<string> visitedCaves, List<string> path, string cave)
+    private static int Traverse(Caves caves, HashSet<string> visitedCaves, string cave)
     {
-        path = new List<string>(path) { cave };
         if (cave == "end")
-        {
             return 1;
-        }
 
         if (Caves.IsSmall(cave))
             visitedCaves = new HashSet<string>(visitedCaves) { cave };
@@ -22,11 +19,13 @@ public static class Solver
             .GetCavesLinkedTo(cave)
             .Where(c => !visitedCaves.Contains(c))
             .ToList();
+ 
         var result = 0;
         foreach (var linkedCave in linkedCaves)
         {
-            result += Traverse(caves, visitedCaves, path, linkedCave);
+            result += Traverse(caves, visitedCaves, linkedCave);
         }
+        
         return result;
     }
 

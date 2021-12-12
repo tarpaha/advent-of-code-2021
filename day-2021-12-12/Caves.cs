@@ -11,7 +11,8 @@ public class Caves
         }
     }
 
-    public List<string> GetCavesLinkedTo(string cave) => _links[cave];
+    public IEnumerable<string> AllCaves => _links.Keys;
+    public IEnumerable<string> GetCavesLinkedTo(string cave) => _links[cave];
     public static bool IsSmall(string cave) => char.IsLower(cave[0]);
 
     private void AddLink(string caveFrom, string caveTo)

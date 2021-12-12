@@ -4,26 +4,41 @@ public static class Solver
 {
     public static int Part1(Data data)
     {
-        return Traverse(new Caves(data), new HashSet<string>(), "start");
+        var caves = new Caves(data);
+        var visitsLeft = caves
+            .AllCaves
+            .Where(Caves.IsSmall)
+            .ToDictionary(cave => cave, _ => 1);
+        return Traverse(new Caves(data), visitsLeft, "start");
     }
 
-    private static int Traverse(Caves caves, HashSet<string> visitedCaves, string cave)
+    private static int Traverse(Caves caves, Dictionary<string, int> visitsLeft, string cave)
     {
         if (cave == "end")
             return 1;
 
         if (Caves.IsSmall(cave))
-            visitedCaves = new HashSet<string>(visitedCaves) { cave };
+        {
+            visitsLeft = new Dictionary<string, int>(visitsLeft);
+            visitsLeft[cave] -= 1;
+        }
 
-        var linkedCaves = caves
-            .GetCavesLinkedTo(cave)
-            .Where(c => !visitedCaves.Contains(c))
-            .ToList();
- 
+        var linkedCaves = new List<string>();
+        foreach (var linkedCave in caves.GetCavesLinkedTo(cave))
+        {
+            if (Caves.IsSmall(linkedCave))
+            {
+                if(visitsLeft[linkedCave] > 0)
+                    linkedCaves.Add(linkedCave);
+            }
+            else
+                linkedCaves.Add(linkedCave);
+        }
+            
         var result = 0;
         foreach (var linkedCave in linkedCaves)
         {
-            result += Traverse(caves, visitedCaves, linkedCave);
+            result += Traverse(caves, visitsLeft, linkedCave);
         }
         
         return result;

@@ -16,9 +16,9 @@ A-b
 b-d
 A-end
 b-end"));
-        Assert.That(caves.GetLinkedCaves("start").OrderBy(s => s), Is.EquivalentTo(new [] { "A", "b" }.OrderBy(s => s)));
-        Assert.That(caves.GetLinkedCaves("end").OrderBy(s => s), Is.EquivalentTo(new [] { "A", "b" }.OrderBy(s => s)));
-        Assert.That(caves.GetLinkedCaves("A").OrderBy(s => s), Is.EquivalentTo(new [] { "c", "start", "b", "end" }.OrderBy(s => s)));
-        Assert.That(caves.GetLinkedCaves("b").OrderBy(s => s), Is.EquivalentTo(new [] { "A", "start", "d", "end" }.OrderBy(s => s)));
+        Assert.That(caves.GetCavesLinkedTo("start").OrderBy(s => s), Is.EquivalentTo(new [] { "A", "b" }.OrderBy(s => s)));
+        Assert.That(caves.GetCavesLinkedTo("end").OrderBy(s => s), Is.EquivalentTo(new [] { "A", "b" }.OrderBy(s => s)));
+        Assert.That(caves.GetCavesLinkedTo("A").OrderBy(s => s), Is.EquivalentTo(new [] { "c", "start", "b", "end" }.OrderBy(s => s)));
+        Assert.That(caves.GetCavesLinkedTo("b").OrderBy(s => s), Is.EquivalentTo(new [] { "A", "start", "d", "end" }.OrderBy(s => s)));
     }
 }

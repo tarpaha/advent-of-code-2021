@@ -11,7 +11,8 @@ public class Caves
         }
     }
 
-    public List<string> GetLinkedCaves(string cave) => _links[cave];
+    public List<string> GetCavesLinkedTo(string cave) => _links[cave];
+    public static bool IsSmall(string cave) => char.IsLower(cave[0]);
 
     private void AddLink(string caveFrom, string caveTo)
     {
@@ -20,7 +21,7 @@ public class Caves
             linkedCaves = new List<string>();
             _links.Add(caveFrom, linkedCaves);
         }
-        linkedCaves!.Add(caveTo);
+        linkedCaves.Add(caveTo);
     }
 
     private readonly Dictionary<string, List<string>> _links = new();

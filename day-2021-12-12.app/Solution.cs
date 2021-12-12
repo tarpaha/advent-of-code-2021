@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using utils;
 
 namespace day_2021_12_12.app;
@@ -8,7 +9,9 @@ public class Solution : ISolution
     {
         var solution = new Solution();
         Console.WriteLine($"Part1: {solution.SolvePart1()}");
-        Console.WriteLine($"Part2: {solution.SolvePart2()}");
+
+        var t = Stopwatch.StartNew();
+        Console.WriteLine($"Part2: {solution.SolvePart2()} done in {t.ElapsedMilliseconds}ms");
     }
 
     public Solution()

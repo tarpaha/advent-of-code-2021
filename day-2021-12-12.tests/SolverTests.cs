@@ -56,9 +56,16 @@ start-RW", 226)]
         Assert.That(Solver.Part1(Parser.Parse(data)), Is.EqualTo(result));
     }
     
-    [Test]
-    public void Part2()
+    [TestCase(@"
+start-A
+start-b
+A-c
+A-b
+b-d
+A-end
+b-end", 36)]
+    public void Part2(string data, int result)
     {
-        Assert.That(Solver.Part2(Parser.Parse(Data)), Is.Null);
+        Assert.That(Solver.Part2(Parser.Parse(data)), Is.EqualTo(result));
     }
 }

@@ -9,13 +9,37 @@ public static class Solver
             .AllCaves
             .Where(Caves.IsSmall)
             .ToDictionary(cave => cave, _ => 1);
-        return Traverse(new Caves(data), visitsLeft, "start");
+        return Traverse(new Caves(data), visitsLeft, "start", new List<string>()).Distinct().Count();
     }
 
-    private static int Traverse(Caves caves, Dictionary<string, int> visitsLeft, string cave)
+    public static object Part2(Data data)
     {
+        var caves = new Caves(data);
+        var smallCaves = caves.AllCaves.Where(Caves.IsSmall).ToList();
+
+        var variants = new List<Dictionary<string, int>>();
+        foreach (var smallCave in smallCaves)
+        {
+            var visitsLeft = smallCaves.ToDictionary(cave => cave, _ => 1);
+            if (smallCave != "start" && smallCave != "end")
+                visitsLeft[smallCave] = 2;
+            variants.Add(visitsLeft);
+        }
+
+        return variants
+            .AsParallel()
+            .SelectMany(visitsLeft => Traverse(caves, visitsLeft, "start", new List<string>()))
+            .Distinct()
+            .Count();
+    }
+
+    private static IEnumerable<string> Traverse(Caves caves, Dictionary<string, int> visitsLeft, string cave, List<string> path)
+    {
+        path = new List<string>(path) { cave };
         if (cave == "end")
-            return 1;
+        {
+            return new [] { string.Join(",", path) };
+        }
 
         if (Caves.IsSmall(cave))
         {
@@ -35,17 +59,12 @@ public static class Solver
                 linkedCaves.Add(linkedCave);
         }
             
-        var result = 0;
+        var paths = new List<string>();
         foreach (var linkedCave in linkedCaves)
         {
-            result += Traverse(caves, visitsLeft, linkedCave);
+            paths.AddRange(Traverse(caves, visitsLeft, linkedCave, path));
         }
         
-        return result;
-    }
-
-    public static object Part2(Data data)
-    {
-        return null!;
+        return paths;
     }
 }

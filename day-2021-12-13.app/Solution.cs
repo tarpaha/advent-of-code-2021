@@ -23,7 +23,7 @@ public class Solution : ISolution
 
     public object SolvePart2()
     {
-        return Solver.Part2(_data);
+        return Environment.NewLine + Solver.Part2(_data);
     }
 
     private readonly Data _data;

@@ -5,7 +5,7 @@ public class Data
     public enum Fold { Horz, Vert }
 
     public IEnumerable<(int, int)> Dots { get; }
-    public IEnumerable<(Fold, int)> Folds { get; }
+    public IEnumerable<(Fold orientation, int coord)> Folds { get; }
 
     public Data(IEnumerable<(int, int)> dots, IEnumerable<(Fold, int)> folds)
     {

@@ -4,7 +4,25 @@ namespace day_2021_12_14.tests;
 
 public class SolverTests
 {
-    private const string Data = @"";
+    private const string Data = @"
+NNCB
+
+CH -> B
+HH -> N
+CB -> H
+NH -> C
+HB -> C
+HC -> B
+HN -> C
+NN -> C
+BH -> H
+NC -> B
+NB -> B
+BN -> B
+BB -> N
+BC -> B
+CC -> N
+CN -> C";
 
     [Test]
     public void Part1()

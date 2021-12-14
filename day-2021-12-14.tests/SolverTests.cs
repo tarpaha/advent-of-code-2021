@@ -24,10 +24,19 @@ BC -> B
 CC -> N
 CN -> C";
 
+    [TestCase(1, "NCNBCHB")]
+    [TestCase(2, "NBCCNBBBCBHCB")]
+    [TestCase(3, "NBBBCNCCNBBNBNBBCHBHHBCHB")]
+    [TestCase(4, "NBBNBNBBCCNBCNCCNBBNBBNBBBNBBNBBCBHCBHHNHCBBCBHCB")]
+    public void ProcessSteps_Works_Correctly(int stepsCount, string result)
+    {
+        Assert.That(Solver.ProcessSteps(Parser.Parse(Data), stepsCount), Is.EqualTo(result));
+    }
+    
     [Test]
     public void Part1()
     {
-        Assert.That(Solver.Part1(Parser.Parse(Data)), Is.Null);
+        Assert.That(Solver.Part1(Parser.Parse(Data)), Is.EqualTo(1588));
     }
     
     [Test]

@@ -27,19 +27,22 @@ public static class Solver
         var (w, h) = (data.Width, data.Height);
         var cells = MakeCells(data.Numbers.ToList(), w, h);
 
+        var cellsQueue = new PriorityQueue<Cell, int>();
+        
         cells[0].Total = 0;
+        cellsQueue.Enqueue(cells[0], 0);
         
         while (true)
         {
-            var cell = cells.Where(c => !c.Visited).MinBy(c => c.Total)!;
+            var cell = cellsQueue.Dequeue();
 
             if (cell.X == w - 1 && cell.Y == h - 1)
                 return cell.Total;
             
-            UpdateNeighborCell(cells, w, h, cell, -1,  0);
-            UpdateNeighborCell(cells, w, h, cell, +1,  0);
-            UpdateNeighborCell(cells, w, h, cell,  0, -1);
-            UpdateNeighborCell(cells, w, h, cell,  0, +1);
+            UpdateNeighborCell(cells, w, h, cell, -1,  0, cellsQueue);
+            UpdateNeighborCell(cells, w, h, cell, +1,  0, cellsQueue);
+            UpdateNeighborCell(cells, w, h, cell,  0, -1, cellsQueue);
+            UpdateNeighborCell(cells, w, h, cell,  0, +1, cellsQueue);
 
             cell.Visited = true;
         }
@@ -58,7 +61,7 @@ public static class Solver
         return cells;
     }
     
-    private static void UpdateNeighborCell(IReadOnlyList<Cell> cells, int w, int h,  Cell cell, int dx, int dy)
+    private static void UpdateNeighborCell(IReadOnlyList<Cell> cells, int w, int h,  Cell cell, int dx, int dy, PriorityQueue<Cell, int> queue)
     {
         var neighborX = cell.X + dx;
         if (neighborX < 0 || neighborX > w - 1)
@@ -73,7 +76,10 @@ public static class Solver
         {
             var distance = cell.Total + neighborCell.Number;
             if (distance < neighborCell.Total)
+            {
                 neighborCell.Total = distance;
+                queue.Enqueue(neighborCell, neighborCell.Total);
+            }
         }
     }
 

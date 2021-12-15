@@ -87,4 +87,35 @@ public static class Solver
     {
         return null!;
     }
+
+    public static Data ExtendData(Data data)
+    {
+        var w = data.Width;
+        var h = data.Height;
+        var numbers = data.Numbers.ToList();
+
+        const int multiplier = 5;
+        
+        var bigW = w * multiplier;
+        var bigH = h * multiplier;
+        var bigNumbers = new int[bigW * bigH];
+        for (var bigY = 0; bigY < bigH; bigY++)
+        {
+            var y = bigY % h;
+            var tileY = bigY / h;
+            
+            for (var bigX = 0; bigX < bigW; bigX++)
+            {
+                var x = bigX % w;
+                var tileX = bigX / w;
+
+                var number = numbers[x + y * w] + tileX + tileY;
+                if (number > 9)
+                    number -= 9;
+                
+                bigNumbers[bigX + bigY * bigW] = number;
+            }
+        }
+        return new Data(bigW, bigH, bigNumbers);
+    }
 }

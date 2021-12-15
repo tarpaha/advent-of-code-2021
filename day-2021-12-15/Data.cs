@@ -2,12 +2,14 @@ namespace day_2021_12_15;
 
 public class Data
 {
-    public int Size { get; }
+    public int Width { get; }
+    public int Height { get; }
     public IEnumerable<int> Numbers { get; }
 
-    public Data(int size, IEnumerable<int> numbers)
+    public Data(int width, int height, IEnumerable<int> numbers)
     {
-        Size = size;
+        Width = width;
+        Height = height;
         Numbers = numbers;
     }
 }

@@ -5,8 +5,9 @@ public static class Parser
     public static Data Parse(string data)
     {
         var lines = data.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
-        var size = lines.Length;
+        var width = lines[0].Length;
+        var height = lines.Length;
         var numbers = lines.SelectMany(line => line).Select(ch => ch - '0');
-        return new Data(size, numbers);
+        return new Data(width, height, numbers);
     }
 }

@@ -106,8 +106,8 @@ public class SolverTests
 3125421639
 1293138521
 2311944581", 315)]
-    public void Part2()
+    public void Part2(string data, int result)
     {
-        Assert.Pass();
+        Assert.That(Solver.Part2(Parser.Parse(data)), Is.EqualTo(result));
     }
 }

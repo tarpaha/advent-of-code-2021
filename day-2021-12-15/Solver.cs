@@ -18,25 +18,28 @@ public static class Solver
             Visited = visited;
             Total = total;
         }
-
-        public override string ToString() => $"{X} {Y} {Total}";
     }
 
     public static int Part1(Data data)
+    {
+        return FindMinPathLength(data, (0, 0), (data.Width - 1, data.Height - 1));
+    }
+
+    private static int FindMinPathLength(Data data, (int x, int y) start, (int x, int y) finish)
     {
         var (w, h) = (data.Width, data.Height);
         var cells = MakeCells(data.Numbers.ToList(), w, h);
 
         var cellsQueue = new PriorityQueue<Cell, int>();
         
-        cells[0].Total = 0;
-        cellsQueue.Enqueue(cells[0], 0);
+        cells[start.x + start.y * w].Total = 0;
+        cellsQueue.Enqueue(cells[start.x + start.y * w], 0);
         
         while (true)
         {
             var cell = cellsQueue.Dequeue();
 
-            if (cell.X == w - 1 && cell.Y == h - 1)
+            if (cell.X == finish.x && cell.Y == finish.y)
                 return cell.Total;
             
             UpdateNeighborCell(cells, w, h, cell, -1,  0, cellsQueue);
@@ -85,7 +88,8 @@ public static class Solver
 
     public static object Part2(Data data)
     {
-        return null!;
+        data = ExtendData(data);
+        return FindMinPathLength(data, (0, 0), (data.Width - 1, data.Height - 1));
     }
 
     public static Data ExtendData(Data data)
@@ -116,6 +120,7 @@ public static class Solver
                 bigNumbers[bigX + bigY * bigW] = number;
             }
         }
+        
         return new Data(bigW, bigH, bigNumbers);
     }
 }

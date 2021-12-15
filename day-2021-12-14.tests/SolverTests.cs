@@ -38,10 +38,16 @@ CN -> C";
     {
         Assert.That(Solver.Part1(Parser.Parse(Data)), Is.EqualTo(1588));
     }
+
+    [Test]
+    public void ProcessStepsQuick_Works_Correctly()
+    {
+        Assert.That(Solver.ProcessStepsQuick(Parser.Parse(Data), 10), Is.EqualTo(1588));
+    }
     
     [Test]
     public void Part2()
     {
-        Assert.That(Solver.Part2(Parser.Parse(Data)), Is.Null);
+        Assert.That(Solver.Part2(Parser.Parse(Data)), Is.EqualTo(2188189693529));
     }
 }

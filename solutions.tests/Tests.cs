@@ -29,7 +29,7 @@ namespace solutions.tests
 ...#.#.##.####....#.#....#....#.#..#..#
 #..#.#..#.#..#.#..#.#....#....#.#..#..#
 .##...###.#..#..##..####.#....#..#..##.");
-                yield return new TestCaseData(new day_2021_12_14.app.Solution(), 2233, null);
+                yield return new TestCaseData(new day_2021_12_14.app.Solution(), 2233, 2884513602164);
             }
         }
         

@@ -20,15 +20,15 @@ public static class Decoder
     private static Packet Decode(IReadOnlyList<int> bits, ref int pos)
     {
         var version = ReadBits(bits, VersionBitLength, ref pos);
-        var type = DecodeTypeId(ReadBits(bits, TypeIdBitLength, ref pos));
+        var typeId = ReadBits(bits, TypeIdBitLength, ref pos);
         
-        if (type == OperatorType.Number)
+        if (typeId == LiteralTypeId)
             return new LiteralPacket(version, ReadLiteralNumber(bits, ref pos));
 
         var packets = bits[pos++] == 0
             ? ReadPacketsWithBitsLimit(bits, ref pos)
             : ReadPacketsWithCountLimit(bits, ref pos);
-        return new OperatorPacket(version, type, packets);
+        return new OperatorPacket(version, DecodeTypeId(typeId), packets);
     }
 
     private static OperatorType DecodeTypeId(int typeId)
@@ -39,7 +39,6 @@ public static class Decoder
             1 => OperatorType.Product,
             2 => OperatorType.Minimum,
             3 => OperatorType.Maximum,
-            4 => OperatorType.Number,
             5 => OperatorType.Greater,
             6 => OperatorType.Less,
             7 => OperatorType.Equal,
@@ -47,9 +46,9 @@ public static class Decoder
         };
     }
 
-    private static int ReadLiteralNumber(IReadOnlyList<int> bits, ref int pos)
+    private static long ReadLiteralNumber(IReadOnlyList<int> bits, ref int pos)
     {
-        var number = 0;
+        var number = 0L;
         while (true)
         {
             var lastChunk = bits[pos++] == 0;

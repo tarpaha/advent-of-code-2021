@@ -2,11 +2,14 @@
 
 public class OperatorPacket : Packet
 {
-    private readonly List<Packet> _packets;
+    public OperatorType Type { get; }
     public IEnumerable<Packet> Packets => _packets;
 
-    public OperatorPacket(int version, OperatorType type, IEnumerable<Packet> packets) : base(version, type)
+    private readonly List<Packet> _packets;
+
+    public OperatorPacket(int version, OperatorType type, IEnumerable<Packet> packets) : base(version)
     {
+        Type = type;
         _packets = new List<Packet>(packets);
     }
 
@@ -20,6 +23,8 @@ public class OperatorPacket : Packet
     private bool Equals(OperatorPacket other)
     {
         if (!base.Equals(other))
+            return false;
+        if (Type != other.Type)
             return false;
         if (_packets.Count != other._packets.Count)
             return false;
@@ -41,6 +46,6 @@ public class OperatorPacket : Packet
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(base.GetHashCode(), Packets);
+        return HashCode.Combine(base.GetHashCode(), _packets, (int)Type);
     }
 }

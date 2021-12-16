@@ -3,19 +3,17 @@
 public abstract class Packet
 {
     public int Version { get; }
-    public OperatorType Type { get; }
     
-    protected Packet(int version, OperatorType type)
+    protected Packet(int version)
     {
         Version = version;
-        Type = type;
     }
 
     // equality comparer for tests
-
-    protected bool Equals(Packet other)
+    
+    private bool Equals(Packet other)
     {
-        return Version == other.Version && Type == other.Type;
+        return Version == other.Version;
     }
 
     public override bool Equals(object? obj)
@@ -28,6 +26,6 @@ public abstract class Packet
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Version, (int)Type);
+        return Version;
     }
 }

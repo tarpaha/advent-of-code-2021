@@ -2,9 +2,9 @@
 
 public class LiteralPacket : Packet
 {
-    public int Number { get; }
+    public long Number { get; }
 
-    public LiteralPacket(int version, int number) : base(version, OperatorType.Number)
+    public LiteralPacket(int version, long number) : base(version)
     {
         Number = number;
     }

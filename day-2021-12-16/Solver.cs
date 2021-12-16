@@ -18,8 +18,30 @@ public static class Solver
         };
     }
 
-    public static object Part2(Data data)
+    public static long Part2(Data data)
     {
-        return null!;
+        var packet = Decoder.Decode(data.Message);
+        return Calculate(packet);
+    }
+
+    private static long Calculate(Packet packet)
+    {
+        if (packet is LiteralPacket literalPacket)
+            return literalPacket.Number;
+
+        var operatorPacket = (OperatorPacket)packet;
+        var numbers = operatorPacket.Packets.Select(Calculate).ToList();
+
+        return operatorPacket.Type switch
+        {
+            OperatorType.Sum => numbers.Sum(),
+            OperatorType.Product => numbers.Aggregate((m, n) => m * n),
+            OperatorType.Minimum => numbers.Min(),
+            OperatorType.Maximum => numbers.Max(),
+            OperatorType.Greater => numbers[0] >  numbers[1] ? 1L : 0L,
+            OperatorType.Less    => numbers[0] <  numbers[1] ? 1L : 0L,
+            OperatorType.Equal   => numbers[0] == numbers[1] ? 1L : 0L,
+            _ => throw new Exception()
+        };
     }
 }

@@ -22,9 +22,9 @@ public class DecoderTests
         get
         {
             yield return new TestCaseData("D2FE28", new LiteralPacket(6, 2021));
-            yield return new TestCaseData("38006F45291200", new OperatorPacket(1, new [] { new LiteralPacket(6, 10), new LiteralPacket(2, 20) }));
-            yield return new TestCaseData("EE00D40C823060", new OperatorPacket(7, new [] { new LiteralPacket(2, 1), new LiteralPacket(4, 2), new LiteralPacket(1, 3) }));
-            yield return new TestCaseData("8A004A801A8002F478", new OperatorPacket(4, new [] { new OperatorPacket(1, new [] { new OperatorPacket(5, new []{ new LiteralPacket(6, 15) }) }) }));
+            yield return new TestCaseData("38006F45291200", new OperatorPacket(1, OperatorType.Less, new [] { new LiteralPacket(6, 10), new LiteralPacket(2, 20) }));
+            yield return new TestCaseData("EE00D40C823060", new OperatorPacket(7, OperatorType.Maximum, new [] { new LiteralPacket(2, 1), new LiteralPacket(4, 2), new LiteralPacket(1, 3) }));
+            yield return new TestCaseData("8A004A801A8002F478", new OperatorPacket(4, OperatorType.Minimum, new [] { new OperatorPacket(1, OperatorType.Minimum, new [] { new OperatorPacket(5, OperatorType.Minimum, new []{ new LiteralPacket(6, 15) }) }) }));
         }
     }
 

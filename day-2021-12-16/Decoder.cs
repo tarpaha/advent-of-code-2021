@@ -20,15 +20,31 @@ public static class Decoder
     private static Packet Decode(IReadOnlyList<int> bits, ref int pos)
     {
         var version = ReadBits(bits, VersionBitLength, ref pos);
-        var typeId = ReadBits(bits, TypeIdBitLength, ref pos);
+        var type = DecodeTypeId(ReadBits(bits, TypeIdBitLength, ref pos));
         
-        if (typeId == LiteralTypeId)
+        if (type == OperatorType.Number)
             return new LiteralPacket(version, ReadLiteralNumber(bits, ref pos));
 
         var packets = bits[pos++] == 0
             ? ReadPacketsWithBitsLimit(bits, ref pos)
             : ReadPacketsWithCountLimit(bits, ref pos);
-        return new OperatorPacket(version, packets);
+        return new OperatorPacket(version, type, packets);
+    }
+
+    private static OperatorType DecodeTypeId(int typeId)
+    {
+        return typeId switch
+        {
+            0 => OperatorType.Sum,
+            1 => OperatorType.Product,
+            2 => OperatorType.Minimum,
+            3 => OperatorType.Maximum,
+            4 => OperatorType.Number,
+            5 => OperatorType.Greater,
+            6 => OperatorType.Less,
+            7 => OperatorType.Equal,
+            _ => throw new ArgumentOutOfRangeException(nameof(typeId), typeId, null)
+        };
     }
 
     private static int ReadLiteralNumber(IReadOnlyList<int> bits, ref int pos)

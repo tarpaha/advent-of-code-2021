@@ -4,7 +4,7 @@ public class LiteralPacket : Packet
 {
     public int Number { get; }
 
-    public LiteralPacket(int version, int number) : base(version)
+    public LiteralPacket(int version, int number) : base(version, OperatorType.Number)
     {
         Number = number;
     }

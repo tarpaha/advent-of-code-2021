@@ -5,14 +5,14 @@ public class OperatorPacket : Packet
     private readonly List<Packet> _packets;
     public IEnumerable<Packet> Packets => _packets;
 
-    public OperatorPacket(int version, IEnumerable<Packet> packets) : base(version)
+    public OperatorPacket(int version, OperatorType type, IEnumerable<Packet> packets) : base(version, type)
     {
         _packets = new List<Packet>(packets);
     }
 
     public override string ToString()
     {
-        return $"Operator(v{Version}):" + " { " + string.Join(", ", _packets.Select(p => p.ToString())) + " }";
+        return $"{Type}(v{Version}):" + " { " + string.Join(", ", _packets.Select(p => p.ToString())) + " }";
     }
     
     // equality comparer for tests

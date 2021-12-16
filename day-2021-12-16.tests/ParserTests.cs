@@ -4,9 +4,9 @@ namespace day_2021_12_16.tests;
 
 public class ParserTests
 {
-    [Test]
-    public void Parser_Works_Correctly()
+    [TestCase("D2FE28", "D2FE28")]
+    public void Parser_Works_Correctly(string data, string message)
     {
-        Assert.That(Parser.Parse(""), Is.Not.Null);
+        Assert.That(Parser.Parse(data).Message, Is.EqualTo(message));
     }
 }

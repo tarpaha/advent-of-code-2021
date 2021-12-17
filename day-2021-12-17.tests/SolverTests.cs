@@ -10,9 +10,9 @@ public class SolverTests
         Assert.That(Solver.Part1(Parser.Parse(input)), Is.EqualTo(result));
     }
     
-    [Test]
-    public void Part2()
+    [TestCase("target area: x=20..30, y=-10..-5", 112)]
+    public void Part2(string input, int result)
     {
-        Assert.Pass();
+        Assert.That(Solver.Part2(Parser.Parse(input)), Is.EqualTo(result));
     }
 }

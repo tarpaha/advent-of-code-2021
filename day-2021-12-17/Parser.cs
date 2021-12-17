@@ -4,6 +4,10 @@ public static class Parser
 {
     public static Data Parse(string data)
     {
-        return new Data();
+        var parts = data
+            .Split(new[] { "target area: x=", "..", ", y=" }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(int.Parse)
+            .ToList();
+        return new Data(parts[0], parts[1], parts[2], parts[3]);
     }
 }

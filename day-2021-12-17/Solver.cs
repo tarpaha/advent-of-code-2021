@@ -4,7 +4,59 @@ public static class Solver
 {
     public static object Part1(Data data)
     {
+        var suitableXVelocities = GetSuitableXVelocities(data);
         return null!;
+    }
+
+    private static IEnumerable<(int v, IEnumerable<(int t, int x)>)> GetSuitableXVelocities(Data data)
+    {
+        var suitableX = new List<(int v, IEnumerable<(int t, int x)>)>();
+        
+        var maxSuitableVelocity = data.XMax;
+        for (var initialVelocity = maxSuitableVelocity; initialVelocity > 0; initialVelocity--)
+        {
+            var t = 0;
+            var x = 0;
+            var velocity = initialVelocity;
+
+            var inTargetArea = false;
+            while(true)
+            {
+                t += 1;
+                x += velocity;
+                velocity -= 1;
+                {
+                    if (x > data.XMax)
+                        break;
+                    if (data.XMin <= x && x <= data.XMax)
+                    {
+                        inTargetArea = true;
+                        break;
+                    }
+                }
+                if (velocity == 0)
+                    break;
+            }
+
+            if (inTargetArea)
+            {
+                var timePos = new List<(int, int)>();
+                while (true)
+                {
+                    timePos.Add((t, x));
+                    if (velocity == 0)
+                        break;
+                    t += 1;
+                    x += velocity;
+                    velocity -= 1;
+                    if(x > data.XMax)
+                        break;
+                }
+                suitableX.Add((initialVelocity, timePos));
+            }
+        }
+        
+        return suitableX;
     }
 
     public static object Part2(Data data)

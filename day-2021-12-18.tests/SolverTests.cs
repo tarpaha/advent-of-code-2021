@@ -24,6 +24,19 @@ public class SolverTests
         var number = Parser.ParseSnailfishNumber(numberStr);
         Assert.That(Solver.FindReadyToExplodePair(number)?.ToString(), Is.EqualTo(resultStr));
     }
+
+    [TestCase("[[[[[9,8],1],2],3],4]", "[[[[0,9],2],3],4]")]
+    [TestCase("[7,[6,[5,[4,[3,2]]]]]", "[7,[6,[5,[7,0]]]]")]
+    [TestCase("[[6,[5,[4,[3,2]]]],1]", "[[6,[5,[7,0]]],3]")]
+    [TestCase("[[3,[2,[1,[7,3]]]],[6,[5,[4,[3,2]]]]]", "[[3,[2,[8,0]]],[9,[5,[4,[3,2]]]]]")]
+    [TestCase("[[3,[2,[8,0]]],[9,[5,[4,[3,2]]]]]", "[[3,[2,[8,0]]],[9,[5,[7,0]]]]")]
+    public void Explode_Works_Correctly(string numberStr, string resultStr)
+    {
+        var number = Parser.ParseSnailfishNumber(numberStr);
+        var explodingPair = Solver.FindReadyToExplodePair(number)!;
+        Solver.Explode(explodingPair);
+        Assert.That(number.ToString(), Is.EqualTo(resultStr));
+    }
     
     [Test]
     public void Part1()

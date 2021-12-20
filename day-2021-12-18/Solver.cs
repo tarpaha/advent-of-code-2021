@@ -32,6 +32,53 @@ public static class Solver
         return null;
     }
 
+    public static void Explode(Pair pair)
+    {
+        var left = pair;
+        while (left.Parent != null && left != left.Parent.Right)
+        {
+            left = left.Parent;
+        }
+        if (left.Parent != null)
+        {
+            var rightmostToTheLeft = GetRightmostNumber(left.Parent.Left);
+            rightmostToTheLeft.Add(((Number)pair.Left).Value);
+        }
+        
+        var right = pair;
+        while (right.Parent != null && right != right.Parent.Left)
+        {
+            right = right.Parent;
+        }
+        if (right.Parent != null)
+        {
+            var leftmostToTheRight = GetLeftmostNumber(right.Parent!.Right);
+            leftmostToTheRight.Add(((Number)pair.Right).Value);
+        }
+
+        pair.Parent!.ReplaceWithZero(pair);
+    }
+
+    private static Number GetRightmostNumber(SN sn)
+    {
+        return sn switch
+        {
+            Number number => number,
+            Pair pair => GetRightmostNumber(pair.Right),
+            _ => throw new ArgumentOutOfRangeException(nameof(sn))
+        };
+    }
+    
+    private static Number GetLeftmostNumber(SN sn)
+    {
+        return sn switch
+        {
+            Number number => number,
+            Pair pair => GetLeftmostNumber(pair.Left),
+            _ => throw new ArgumentOutOfRangeException(nameof(sn))
+        };
+    }
+
     public static object Part2(Data data)
     {
         return null!;

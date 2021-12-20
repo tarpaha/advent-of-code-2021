@@ -16,8 +16,16 @@ public static class Parser
     
     private static SN ParseSnailfishNumber(string str, ref int pos)
     {
-        if(char.IsDigit(str[pos]))
-            return new Number(str[pos++] - '0');
+        if (char.IsDigit(str[pos]))
+        {
+            var value = 0;
+            while (pos < str.Length && char.IsDigit(str[pos]))
+            {
+                value = value * 10 + (str[pos] - '0');
+                pos += 1;
+            }
+            return new Number(value);
+        }
         pos += 1; // [
         var left = ParseSnailfishNumber(str, ref pos);
         pos += 1; // ,

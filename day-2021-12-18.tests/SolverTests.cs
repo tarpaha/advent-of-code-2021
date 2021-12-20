@@ -38,13 +38,21 @@ public class SolverTests
         Assert.That(number.ToString(), Is.EqualTo(resultStr));
     }
 
-    [TestCase(10, "[5,5]")]
-    [TestCase(11, "[5,6]")]
-    [TestCase(12, "[6,6]")]
-    public void Split_Works_Correctly(int value, string resultStr)
+    [TestCase("[[[[0,7],4],[15,[0,13]]],[1,1]]", 15)]
+    [TestCase("[[[[0,7],4],[[7,8],[0,13]]],[1,1]]", 13)]
+    public void FindReadyToSplitNumber_Works_Correctly(string numberStr, int result)
     {
-        var number = new Number(value);
-        Assert.That(Solver.Split(number).ToString(), Is.EqualTo(resultStr));
+        var number = Parser.ParseSnailfishNumber(numberStr);
+        Assert.That(Solver.FindReadyToSplitNumber(number)?.Value, Is.EqualTo(result));
+    }
+    
+    [TestCase("10", "[5,5]")]
+    [TestCase("11", "[5,6]")]
+    [TestCase("12", "[6,6]")]
+    public void Split_Works_Correctly(string numberStr, string resultStr)
+    {
+        var number = Parser.ParseSnailfishNumber(numberStr) as Number;
+        Assert.That(Solver.Split(number!).ToString(), Is.EqualTo(resultStr));
     }
     
     [Test]

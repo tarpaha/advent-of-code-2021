@@ -79,6 +79,16 @@ public static class Solver
         };
     }
 
+    public static Number? FindReadyToSplitNumber(SN sn)
+    {
+        return sn switch
+        {
+            Number number => number.Value >= 10 ? number : null,
+            Pair pair => FindReadyToSplitNumber(pair.Left) ?? FindReadyToSplitNumber(pair.Right),
+            _ => throw new ArgumentOutOfRangeException(nameof(sn))
+        };
+    }
+    
     public static Pair Split(Number number)
     {
         var half = number.Value >> 1;

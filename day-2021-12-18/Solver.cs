@@ -7,6 +7,11 @@ public static class Solver
         return null!;
     }
 
+    public static SN Add(SN n1, SN n2)
+    {
+        return new Pair(n1, n2);
+    }
+
     public static object Part2(Data data)
     {
         return null!;

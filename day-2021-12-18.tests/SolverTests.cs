@@ -6,6 +6,14 @@ public class SolverTests
 {
     private const string Data = @"";
 
+    [TestCase("[1,2]", "[[3,4],5]", "[[1,2],[[3,4],5]]")]
+    public void Add_Works_Correctly(string str1, string str2, string resultStr)
+    {
+        var n1 = Parser.ParseSnailfishNumber(str1);
+        var n2 = Parser.ParseSnailfishNumber(str2);
+        Assert.That(Solver.Add(n1, n2).ToString(), Is.EqualTo(resultStr));
+    }
+    
     [Test]
     public void Part1()
     {

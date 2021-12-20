@@ -12,6 +12,26 @@ public static class Solver
         return new Pair(n1, n2);
     }
 
+    public static Pair? FindReadyToExplodePair(SN number, int depth = 0)
+    {
+        if (number is Pair pair)
+        {
+            if (depth == 4)
+            {
+                if (!(pair.Left is Number && pair.Right is Number))
+                    throw new Exception("There is pair inside four pairs");
+                return pair;
+            }
+            
+            var result = FindReadyToExplodePair(pair.Left, depth + 1);
+            if (result != null)
+                return result;
+            
+            return FindReadyToExplodePair(pair.Right, depth + 1);
+        }
+        return null;
+    }
+
     public static object Part2(Data data)
     {
         return null!;

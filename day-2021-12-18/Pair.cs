@@ -12,12 +12,12 @@ public class Pair : SN
         Left.Parent = Right.Parent = this;
     }
 
-    public void ReplaceWithZero(Pair pair)
+    public void ReplaceWith(Pair pair, SN sn)
     {
         if (Left == pair)
-            Left = new Number(0);
+            Left = sn;
         else
-            Right = new Number(0);
+            Right = sn;
     }
     
     public override string ToString() => $"[{Left},{Right}]";

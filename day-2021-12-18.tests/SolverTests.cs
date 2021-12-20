@@ -37,6 +37,15 @@ public class SolverTests
         Solver.Explode(explodingPair);
         Assert.That(number.ToString(), Is.EqualTo(resultStr));
     }
+
+    [TestCase(10, "[5,5]")]
+    [TestCase(11, "[5,6]")]
+    [TestCase(12, "[6,6]")]
+    public void Split_Works_Correctly(int value, string resultStr)
+    {
+        var number = new Number(value);
+        Assert.That(Solver.Split(number).ToString(), Is.EqualTo(resultStr));
+    }
     
     [Test]
     public void Part1()

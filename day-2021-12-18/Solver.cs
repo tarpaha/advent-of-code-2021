@@ -56,7 +56,7 @@ public static class Solver
             leftmostToTheRight.Add(((Number)pair.Right).Value);
         }
 
-        pair.Parent!.ReplaceWithZero(pair);
+        pair.Parent!.ReplaceWith(pair, new Number(0));
     }
 
     private static Number GetRightmostNumber(SN sn)
@@ -77,6 +77,13 @@ public static class Solver
             Pair pair => GetLeftmostNumber(pair.Left),
             _ => throw new ArgumentOutOfRangeException(nameof(sn))
         };
+    }
+
+    public static Pair Split(Number number)
+    {
+        var half = number.Value >> 1;
+        var delta = (number.Value & 1) == 1 ? 1 : 0;
+        return new Pair(new Number(half), new Number(half + delta));
     }
 
     public static object Part2(Data data)

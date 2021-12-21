@@ -143,6 +143,33 @@ public static class Solver
 
     public static object Part2(Data data)
     {
-        return null!;
+        var numbers = new List<SN>(data.Numbers);
+        var pairs = new List<(SN n1, SN n2)>();
+        for (var id1 = 0; id1 < numbers.Count; id1++)
+        {
+            for (var id2 = 0; id2 < numbers.Count; id2++)
+            {
+                if (id1 == id2)
+                    continue;
+                var n1 = DeepCopy(numbers[id1]);
+                var n2 = DeepCopy(numbers[id2]);
+                pairs.Add((n1, n2));
+            }
+        }
+        return pairs
+            .AsParallel()
+            .Select(pair => AddAndReduce(pair.n1, pair.n2))
+            .Select(Magnitude)
+            .Max();
+    }
+
+    public static SN DeepCopy(SN sn)
+    {
+        return sn switch
+        {
+            Number number => new Number(number.Value),
+            Pair pair => new Pair(DeepCopy(pair.Left), DeepCopy(pair.Right)),
+            _ => throw new ArgumentOutOfRangeException(nameof(sn))
+        };
     }
 }

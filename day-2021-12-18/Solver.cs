@@ -12,6 +12,13 @@ public static class Solver
         return new Pair(n1, n2);
     }
 
+    public static SN AddAndReduce(SN n1, SN n2)
+    {
+        var sum = Add(n1, n2);
+        while (Reduce(sum)) { }
+        return sum;
+    }
+
     public static Pair? FindReadyToExplodePair(SN number, int depth = 0)
     {
         if (number is Pair pair)

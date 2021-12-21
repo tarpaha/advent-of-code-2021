@@ -68,6 +68,15 @@ public class SolverTests
         Assert.That(reduced, Is.EqualTo(resultReduced));
         Assert.That(number.ToString(), Is.EqualTo(resultStr));
     }
+
+    [TestCase("[[[[4,3],4],4],[7,[[8,4],9]]]", "[1,1]", "[[[[0,7],4],[[7,8],[6,0]]],[8,1]]")]
+    [TestCase("[[[0,[4,5]],[0,0]],[[[4,5],[2,6]],[9,5]]]", "[7,[[[3,7],[4,3]],[[6,3],[8,8]]]]", "[[[[4,0],[5,4]],[[7,7],[6,0]]],[[8,[7,7]],[[7,9],[5,0]]]]")]
+    public void AddAndReduce_Works_Correctly(string str1, string str2, string resultStr)
+    {
+        var n1 = Parser.ParseSnailfishNumber(str1);
+        var n2 = Parser.ParseSnailfishNumber(str2);
+        Assert.That(Solver.AddAndReduce(n1, n2).ToString(), Is.EqualTo(resultStr));
+    }
     
     [Test]
     public void Part1()

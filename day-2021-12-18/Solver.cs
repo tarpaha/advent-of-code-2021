@@ -2,9 +2,9 @@ namespace day_2021_12_18;
 
 public static class Solver
 {
-    public static object Part1(Data data)
+    public static long Part1(Data data)
     {
-        return null!;
+        return Magnitude(FinalSum(data.Numbers));
     }
 
     public static SN Add(SN n1, SN n2)
@@ -24,6 +24,16 @@ public static class Solver
         var numbers = numbersCollection.ToList();
         var sum = numbers.First();
         return numbers.Skip(1).Aggregate(sum, AddAndReduce);
+    }
+
+    public static long Magnitude(SN sn)
+    {
+        return sn switch
+        {
+            Number number => number.Value,
+            Pair pair => 3L * Magnitude(pair.Left) + 2L * Magnitude(pair.Right),
+            _ => throw new ArgumentOutOfRangeException(nameof(sn))
+        };
     }
 
     public static Pair? FindReadyToExplodePair(SN number, int depth = 0)

@@ -18,7 +18,7 @@ public static class Parser
     {
         if (char.IsDigit(str[pos]))
         {
-            var value = 0;
+            var value = 0L;
             while (pos < str.Length && char.IsDigit(str[pos]))
             {
                 value = value * 10 + (str[pos] - '0');

@@ -4,8 +4,6 @@ namespace day_2021_12_18.tests;
 
 public class SolverTests
 {
-    private const string Data = @"";
-
     [TestCase("[1,2]", "[[3,4],5]", "[[1,2],[[3,4],5]]")]
     public void Add_Works_Correctly(string str1, string str2, string resultStr)
     {
@@ -123,16 +121,42 @@ public class SolverTests
         var data = Parser.Parse(input);
         Assert.That(Solver.FinalSum(data.Numbers).ToString(), Is.EqualTo(resultStr));
     }
-    
-    [Test]
-    public void Part1()
+
+    [TestCase("[9,1]", 29)]
+    [TestCase("[1,9]", 21)]
+    [TestCase("[[9,1],[1,9]", 129)]
+    [TestCase("[[1,2],[[3,4],5]]", 143)]
+    [TestCase("[[[[0,7],4],[[7,8],[6,0]]],[8,1]]", 1384)]
+    [TestCase("[[[[1,1],[2,2]],[3,3]],[4,4]]", 445)]
+    [TestCase("[[[[3,0],[5,3]],[4,4]],[5,5]]", 791)]
+    [TestCase("[[[[5,0],[7,4]],[5,5]],[6,6]]", 1137)]
+    [TestCase("[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]", 3488)]
+    [TestCase("[[[[6,6],[7,6]],[[7,7],[7,0]]],[[[7,7],[7,7]],[[7,8],[9,9]]]]", 4140)]
+    public void Magnitude_Works_Correctly(string numberStr, long result)
     {
-        Assert.That(Solver.Part1(Parser.Parse(Data)), Is.Null);
+        var number = Parser.ParseSnailfishNumber(numberStr);
+        Assert.That(Solver.Magnitude(number), Is.EqualTo(result));
+    }
+    
+    [TestCase(@"
+[[[0,[5,8]],[[1,7],[9,6]]],[[4,[1,2]],[[1,4],2]]]
+[[[5,[2,8]],4],[5,[[9,9],0]]]
+[6,[[[6,2],[5,6]],[[7,6],[4,7]]]]
+[[[6,[0,7]],[0,9]],[4,[9,[9,0]]]]
+[[[7,[6,4]],[3,[1,3]]],[[[5,5],1],9]]
+[[6,[[7,3],[3,2]]],[[[3,8],[5,7]],4]]
+[[[[5,4],[7,7]],8],[[8,3],8]]
+[[9,3],[[9,9],[6,[4,9]]]]
+[[2,[[7,7],7]],[[5,8],[[9,3],[0,2]]]]
+[[[[5,2],5],[8,[3,7]]],[[5,[7,5]],[4,4]]]",4140)]
+    public void Part1(string input, long result)
+    {
+        Assert.That(Solver.Part1(Parser.Parse(input)), Is.EqualTo(result));
     }
     
     [Test]
     public void Part2()
     {
-        Assert.That(Solver.Part2(Parser.Parse(Data)), Is.Null);
+        Assert.Pass();
     }
 }

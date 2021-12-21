@@ -2,14 +2,14 @@ namespace day_2021_12_18;
 
 public class Number : SN
 {
-    public int Value { get; private set; }
+    public long Value { get; private set; }
     
-    public Number(int value)
+    public Number(long value)
     {
         Value = value;
     }
 
-    public void Add(int value)
+    public void Add(long value)
     {
         Value += value;
     }

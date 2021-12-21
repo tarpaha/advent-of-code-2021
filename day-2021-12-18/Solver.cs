@@ -19,6 +19,13 @@ public static class Solver
         return sum;
     }
 
+    public static SN FinalSum(IEnumerable<SN> numbersCollection)
+    {
+        var numbers = numbersCollection.ToList();
+        var sum = numbers.First();
+        return numbers.Skip(1).Aggregate(sum, AddAndReduce);
+    }
+
     public static Pair? FindReadyToExplodePair(SN number, int depth = 0)
     {
         if (number is Pair pair)

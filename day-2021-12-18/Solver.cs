@@ -93,7 +93,28 @@ public static class Solver
     {
         var half = number.Value >> 1;
         var delta = (number.Value & 1) == 1 ? 1 : 0;
-        return new Pair(new Number(half), new Number(half + delta));
+        var divided = new Pair(new Number(half), new Number(half + delta)); 
+        number.Parent?.ReplaceWith(number, divided);
+        return divided;
+    }
+
+    public static bool Reduce(SN number)
+    {
+        var exploding = FindReadyToExplodePair(number);
+        if (exploding != null)
+        {
+            Explode(exploding);
+            return true;
+        }
+
+        var splitting = FindReadyToSplitNumber(number);
+        if (splitting != null)
+        {
+            Split(splitting);
+            return true;
+        }
+
+        return false;
     }
 
     public static object Part2(Data data)

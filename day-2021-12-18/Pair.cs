@@ -12,7 +12,7 @@ public class Pair : SN
         Left.Parent = Right.Parent = this;
     }
 
-    public void ReplaceWith(Pair pair, SN sn)
+    public void ReplaceWith(SN pair, SN sn)
     {
         if (Left == pair)
             Left = sn;

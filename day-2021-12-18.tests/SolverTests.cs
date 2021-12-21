@@ -54,6 +54,20 @@ public class SolverTests
         var number = Parser.ParseSnailfishNumber(numberStr) as Number;
         Assert.That(Solver.Split(number!).ToString(), Is.EqualTo(resultStr));
     }
+
+    [TestCase("[[[[[4,3],4],4],[7,[[8,4],9]]],[1,1]]", true, "[[[[0,7],4],[7,[[8,4],9]]],[1,1]]")]
+    [TestCase("[[[[0,7],4],[7,[[8,4],9]]],[1,1]]", true, "[[[[0,7],4],[15,[0,13]]],[1,1]]")]
+    [TestCase("[[[[0,7],4],[15,[0,13]]],[1,1]]", true, "[[[[0,7],4],[[7,8],[0,13]]],[1,1]]")]
+    [TestCase("[[[[0,7],4],[[7,8],[0,13]]],[1,1]]", true, "[[[[0,7],4],[[7,8],[0,[6,7]]]],[1,1]]")]
+    [TestCase("[[[[0,7],4],[[7,8],[0,[6,7]]]],[1,1]]", true, "[[[[0,7],4],[[7,8],[6,0]]],[8,1]]")]
+    [TestCase("[[[[0,7],4],[[7,8],[6,0]]],[8,1]]", false, "[[[[0,7],4],[[7,8],[6,0]]],[8,1]]")]
+    public void Reduce_Works_Correctly(string numberStr, bool resultReduced, string resultStr)
+    {
+        var number = Parser.ParseSnailfishNumber(numberStr);
+        var reduced = Solver.Reduce(number);
+        Assert.That(reduced, Is.EqualTo(resultReduced));
+        Assert.That(number.ToString(), Is.EqualTo(resultStr));
+    }
     
     [Test]
     public void Part1()
